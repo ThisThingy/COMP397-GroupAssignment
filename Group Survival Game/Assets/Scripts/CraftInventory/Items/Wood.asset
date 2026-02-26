@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Wood
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Wood
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 4df7c6af6e40d14459a43f2f1bd076ba, type: 3}
   isStackable: 1
   maxStack: 50

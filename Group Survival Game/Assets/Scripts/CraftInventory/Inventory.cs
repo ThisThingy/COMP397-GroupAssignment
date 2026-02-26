@@ -6,7 +6,7 @@ public class Inventory : MonoBehaviour
 {
     public int inventorySize = 20;
     public List<InventorySlot> slots = new List<InventorySlot>();
-
+    public System.Action OnInventoryChanged;
     private void Awake()
     {
         for (int i = 0; i < inventorySize; i++)
@@ -20,8 +20,9 @@ public class Inventory : MonoBehaviour
         if (item == null) return false;
 
         int remainingAmount = amount;
+        bool changed = false;
 
-        //  filling existing stacks
+        // Fill existing stacks
         if (item.isStackable)
         {
             foreach (InventorySlot slot in slots)
@@ -34,13 +35,18 @@ public class Inventory : MonoBehaviour
                     slot.amount += amountToAdd;
                     remainingAmount -= amountToAdd;
 
+                    changed = true;
+
                     if (remainingAmount <= 0)
+                    {
+                        OnInventoryChanged?.Invoke();
                         return true;
+                    }
                 }
             }
         }
 
-        // use empty slots
+        // Use empty slots
         foreach (InventorySlot slot in slots)
         {
             if (slot.IsEmpty())
@@ -57,12 +63,19 @@ public class Inventory : MonoBehaviour
                 if (!item.isStackable)
                     remainingAmount--;
 
+                changed = true;
+
                 if (remainingAmount <= 0)
+                {
+                    OnInventoryChanged?.Invoke();
                     return true;
+                }
             }
         }
 
-        // 3 remaining items, inventory is full
+        if (changed)
+            OnInventoryChanged?.Invoke();
+
         Debug.Log("Inventory Full! Could not add all items.");
         return false;
     }
@@ -82,6 +95,8 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(ItemData item, int amount)
     {
+        bool changed = false;
+
         foreach (InventorySlot slot in slots)
         {
             if (slot.item == item)
@@ -93,9 +108,17 @@ public class Inventory : MonoBehaviour
                 if (slot.amount <= 0)
                     slot.Clear();
 
+                changed = true;
+
                 if (amount <= 0)
+                {
+                    OnInventoryChanged?.Invoke();
                     return;
+                }
             }
         }
+
+        if (changed)
+            OnInventoryChanged?.Invoke();
     }
 }

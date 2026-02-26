@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e8294b7f901743439201953e21be8cf, type: 3}
-  m_Name: Stone
+  m_Name: Stone Pickaxe
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Stone
-  icon: {fileID: 21300000, guid: f6f78d52822c1e641abe7dc01946c083, type: 3}
-  isStackable: 1
-  maxStack: 50
+  itemName: Stone Pickaxe
+  icon: {fileID: 0}
+  isStackable: 0
+  maxStack: 1
