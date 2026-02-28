@@ -4,6 +4,7 @@ using System;
 using Unity.Mathematics;
 using UnityEditor.AssetImporters;
 using UnityEngine;
+using Unity.AI.Navigation;
 
 public class WorldGen_Terrain : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class WorldGen_Terrain : MonoBehaviour
     public DrawMode drawMode;
 
     public Material mats;
+    [SerializeField] GameObject objYes;
 
     public int mapWidth;
     public int mapHeight;
@@ -89,7 +91,9 @@ public class WorldGen_Terrain : MonoBehaviour
     {
         GenerateMap();
         GetComponent<Mapdisp>().meshRenderer.material = mats;
-        
+        objYes.GetComponent<MeshCollider>().sharedMesh = null;
+        objYes.GetComponent<MeshCollider>().sharedMesh = GetComponent<Mapdisp>().meshFilter.mesh;
+        objYes.GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 
 }
