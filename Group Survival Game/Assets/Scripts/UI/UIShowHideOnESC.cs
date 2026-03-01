@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class UIShowHideOnESC : MonoBehaviour
 {
@@ -10,9 +11,16 @@ public class UIShowHideOnESC : MonoBehaviour
     [Header("Optional Time Control")]
     [SerializeField] private bool pauseGameTime = true;
     [SerializeField] private bool resumeGameTime = false;
+    
+
+    private void Awake()
+    {
+        
+    }
 
     private void Update()
     {
+        Debug.Log("Recieved");
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (objectsToShow != null)
@@ -20,7 +28,10 @@ public class UIShowHideOnESC : MonoBehaviour
                 for (int i = 0; i < objectsToShow.Length; i++)
                 {
                     if (objectsToShow[i] != null)
+                    {
                         objectsToShow[i].SetActive(true);
+                        Cursor.lockState = CursorLockMode.None;
+                    }
                 }
             }
 
@@ -29,7 +40,10 @@ public class UIShowHideOnESC : MonoBehaviour
                 for (int i = 0; i < objectsToHide.Length; i++)
                 {
                     if (objectsToHide[i] != null)
+                    {
                         objectsToHide[i].SetActive(false);
+                        Cursor.lockState = CursorLockMode.None;
+                    }
                 }
             }
 
