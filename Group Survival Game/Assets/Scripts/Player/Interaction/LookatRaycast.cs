@@ -17,11 +17,14 @@ public class LookatRaycast : MonoBehaviour
     {
         Ray LookatScanner = currentCam.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(LookatScanner, out touched, 10.0f))
+        if (Physics.Raycast(LookatScanner, out touched, 4.0f))
         {
             if (touched.transform.tag == "interactable")
             {
                 indset.HoverEntry(touched.collider.GetComponent<Object_Interactable>().itemName);
+            }else
+            {
+                indset.HoverExit();
             }
         }
         else

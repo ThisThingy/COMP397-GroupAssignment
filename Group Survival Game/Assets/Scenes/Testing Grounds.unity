@@ -1676,7 +1676,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -4822,6 +4822,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LookatRaycast
   currentCam: {fileID: 798915960}
+  indset: {fileID: 1539544097}
+  intrObj: {fileID: 0}
 --- !u!1 &2079441434
 GameObject:
   m_ObjectHideFlags: 0
