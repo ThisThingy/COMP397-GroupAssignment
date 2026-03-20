@@ -4168,7 +4168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI_CrudeCombat
   player: {fileID: 157807189}
-  glovol: {fileID: 0}
+  glovol: {fileID: 714706759}
   attackStance: 0
   stanceReady: 3.5
   dmg: 4

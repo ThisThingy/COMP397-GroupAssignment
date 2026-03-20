@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System;
 using Unity.Mathematics;
-using UnityEditor.AssetImporters;
 using UnityEngine;
 using Unity.AI.Navigation;
 
