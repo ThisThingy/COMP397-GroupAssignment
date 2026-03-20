@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Iron Axe
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Iron Axe
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: c73fde09fb7dbf3469247753cfa7b2b9, type: 3}
   isStackable: 0
   maxStack: 1
