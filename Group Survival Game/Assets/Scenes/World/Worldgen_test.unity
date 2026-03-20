@@ -627,7 +627,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Vitals
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 923018947f57741468071bed9dd191f0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b426b4c58e0d7c0409bec120811ef436, type: 2}
   m_sharedMaterial: {fileID: -3398860419474676241, guid: 923018947f57741468071bed9dd191f0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -694,7 +694,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &79480911
@@ -1726,7 +1726,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &188655044
 Canvas:
   m_ObjectHideFlags: 0
@@ -4427,8 +4427,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: A fucking cube
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 923018947f57741468071bed9dd191f0, type: 2}
-  m_sharedMaterial: {fileID: -3398860419474676241, guid: 923018947f57741468071bed9dd191f0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5104,7 +5104,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 923018947f57741468071bed9dd191f0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b426b4c58e0d7c0409bec120811ef436, type: 2}
   m_sharedMaterial: {fileID: -3398860419474676241, guid: 923018947f57741468071bed9dd191f0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5171,7 +5171,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -3.80365, w: -46.173016}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &914970637
@@ -5671,7 +5671,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &1046799797
 Canvas:
   m_ObjectHideFlags: 0
@@ -6243,8 +6243,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '[E] to interact'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 923018947f57741468071bed9dd191f0, type: 2}
-  m_sharedMaterial: {fileID: -3398860419474676241, guid: 923018947f57741468071bed9dd191f0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6416,6 +6416,7 @@ MonoBehaviour:
   craftingSystem: {fileID: 1433305623}
   wood: {fileID: 11400000, guid: 392bcc0a00f93664db89b38eb859d237, type: 2}
   stone: {fileID: 11400000, guid: f4bbabb635f0e574ca6ebd61e452c0d1, type: 2}
+  iron: {fileID: 0}
   axeRecipe: {fileID: 11400000, guid: d40a184577332b24da9ea35833b1e567, type: 2}
 --- !u!114 &1433305623
 MonoBehaviour:
@@ -6471,7 +6472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dea042d7061d446bb65816176da8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HideShow
-  invetoryUI: {fileID: 1959246150}
+  inventoryUI: {fileID: 0}
   show: 0
 --- !u!1 &1557638388
 GameObject:
