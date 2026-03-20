@@ -6,7 +6,8 @@ public class UIMenuClickAction : MonoBehaviour, IPointerClickHandler
     public enum ActionType
     {
         SwitchCamera,
-        QuitGame
+        QuitGame,
+        QuitAndSave
     }
 
     [Header("Action")]
@@ -18,7 +19,8 @@ public class UIMenuClickAction : MonoBehaviour, IPointerClickHandler
 
     [Header("Optional UI")]
     [SerializeField] private GameObject[] objectsToHideOnClick; 
-    [SerializeField] private GameObject[] objectsToShowOnClick; 
+    [SerializeField] private GameObject[] objectsToShowOnClick;
+    [SerializeField] private GameObject player;
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -31,6 +33,9 @@ public class UIMenuClickAction : MonoBehaviour, IPointerClickHandler
             case ActionType.QuitGame:
                 DoQuitGame();
                 break;
+            case ActionType.QuitAndSave:
+                DoSaveQuit();
+            break;
         }
     }
 
@@ -75,6 +80,20 @@ public class UIMenuClickAction : MonoBehaviour, IPointerClickHandler
         }
 
         Debug.Log($"Switched to camera: {targetCamera.name}");
+    }
+
+    private void DoSaveQuit()
+    {
+        Debug.Log("Exit clicked -> QuitGame()");
+        player.GetComponent<PlayerSaveManager>().SaveGame();
+
+
+#if UNITY_EDITOR
+        // 编辑器里不会真的退出，用这个提示
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     private void DoQuitGame()

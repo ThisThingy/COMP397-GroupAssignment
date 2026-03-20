@@ -10,6 +10,7 @@ public class EnemyAI_Base : EnemyStats
     EnemyStats stats_enemigo;
     EnemyAI_Pointpicker enpoi;
     Vector3 targLoc;
+    public EnemyAI_CrudeCombat enecom;
 
     public float distanceDetection = 10.0f;
     public float attentionSpan = 0.0f;
@@ -35,12 +36,27 @@ public class EnemyAI_Base : EnemyStats
     void Update()
     {
         distanceDetection = Vector3.Distance(transform.position, player.position);
-        if(distanceDetection > 20)
+        Debug.LogAssertion(distanceDetection);
+        if (distanceDetection > 20)
+        {
+            enecom.setAttackFalse();
             casingModeId = 0;
+        }    
         if (distanceDetection <= 20 && distanceDetection > 10)
+        {
+            enecom.setAttackFalse();
             casingModeId = 1;
+        }
         if (distanceDetection <= 10 && distanceDetection > 5)
+        {
+            enecom.setAttackFalse();
             casingModeId = 2;
+        }
+        if(distanceDetection <= 2)
+        {
+            enecom.setAttackActive();
+            casingModeId = 3;
+        }
 
 
         if (caseMode == true)
@@ -56,6 +72,9 @@ public class EnemyAI_Base : EnemyStats
                 break;
                 case 2:
                     Hunting();
+                break;
+                case 3:
+                    Attack();
                 break;
             }
         }
@@ -99,6 +118,21 @@ public class EnemyAI_Base : EnemyStats
     }
 
     void Hunting()
+    {
+        if (attentionSpan <= 0)
+        {
+            nvme.SetDestination(player.position);
+            nvme.speed = 3.0f;
+            attentionSpan = 2.5f;
+        }
+        else
+        {
+            nvme.SetDestination(player.position);
+            attentionSpan -= Time.deltaTime;
+        }
+    }
+
+    void Attack()
     {
         if (attentionSpan <= 0)
         {

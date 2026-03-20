@@ -9,4 +9,9 @@ public class UIScaler : MonoBehaviour
         gameObject.GetComponent<CanvasScaler>().referenceResolution = new Vector2(Screen.width, Screen.height);  
     }
 
+    private void Update()
+    {
+        gameObject.GetComponent<CanvasScaler>().referenceResolution = new Vector2(Screen.width, Screen.height);
+    }
+
 }

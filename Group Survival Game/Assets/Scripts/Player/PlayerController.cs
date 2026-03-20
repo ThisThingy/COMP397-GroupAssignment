@@ -202,7 +202,4 @@ public class PlayerControl : MonoBehaviour
     private bool CheckGrounded(){return Physics.Raycast(transform.position, Vector3.down, rayDistance, groundLayer);}
 
 
-
-
-
 }
