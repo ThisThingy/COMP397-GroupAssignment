@@ -3,19 +3,22 @@ using UnityEngine.InputSystem;
 
 public class InventoryToggle : MonoBehaviour
 {
-    private Canvas canvas;
-
-    void Awake()
-    {
-        canvas = GetComponent<Canvas>();
-        canvas.enabled = false; // Start hidden
-    }
+    public GameObject inventoryPanel;
+    public GameObject craftingPanel;
+    public PauseToggleOnUI pauseScript;
 
     void Update()
     {
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
-            canvas.enabled = !canvas.enabled;
+            Debug.Log("E pressed");
+
+            bool isActive = inventoryPanel.activeSelf;
+
+            inventoryPanel.SetActive(!isActive);
+            craftingPanel.SetActive(!isActive);
+
+            pauseScript.SetInventoryOpen(!isActive);
         }
     }
 }

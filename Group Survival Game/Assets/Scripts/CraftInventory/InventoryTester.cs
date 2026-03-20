@@ -8,6 +8,7 @@ public class InventoryTester : MonoBehaviour
 
     public ItemData wood;
     public ItemData stone;
+    public ItemData iron;
     public CraftingRecipe axeRecipe;
 
     private void Start()
@@ -38,19 +39,26 @@ public class InventoryTester : MonoBehaviour
             }
         }
 
-        // Press A to add more wood
-        if (Keyboard.current.aKey.wasPressedThisFrame)
+        // Press U to add more wood
+        if (Keyboard.current.uKey.wasPressedThisFrame)
         {
             inventory.AddItem(wood, 45);
             Debug.Log("Added 45 Wood");
             PrintInventory();
         }
 
-        // Press S to add stone
-        if (Keyboard.current.sKey.wasPressedThisFrame)
+        // Press I to add stone
+        if (Keyboard.current.iKey.wasPressedThisFrame)
         {
             inventory.AddItem(stone, 45);
             Debug.Log("Added 45 Stone");
+            PrintInventory();
+        }
+        // Press O to add stone
+        if (Keyboard.current.iKey.wasPressedThisFrame)
+        {
+            inventory.AddItem(iron, 45);
+            Debug.Log("Added 45 Iron");
             PrintInventory();
         }
     }

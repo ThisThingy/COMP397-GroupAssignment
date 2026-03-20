@@ -18,6 +18,7 @@ public class PauseToggleOnUI : MonoBehaviour, IPointerClickHandler
     [SerializeField] private bool lockCursorWhenPlaying = true;
 
     private bool isPaused;
+    private bool isInventoryOpen;
 
     private void Start()
     {
@@ -41,12 +42,36 @@ public class PauseToggleOnUI : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+
         TogglePause();
     }
 
     public void TogglePause()
     {
         SetPaused(!isPaused);
+    }
+    public void SetInventoryOpen(bool open)
+    {
+        isInventoryOpen = open;
+
+        // Disable player look when inventory is open (same as pause)
+        if (disableWhenPaused != null)
+        {
+            for (int i = 0; i < disableWhenPaused.Length; i++)
+            {
+                if (disableWhenPaused[i] != null)
+                    disableWhenPaused[i].enabled = !open;
+            }
+        }
+
+        // Cursor handling
+        if (manageCursor && !isPaused)
+        {
+            if (open)
+                ApplyCursorPaused();   // show cursor
+            else
+                ApplyCursorPlaying(); // hide cursor
+        }
     }
 
     // 给 PauseMenu 的 Resume 按钮绑定这个
@@ -81,8 +106,11 @@ public class PauseToggleOnUI : MonoBehaviour, IPointerClickHandler
         // 关键：鼠标切换（暂停时释放鼠标给UI）
         if (manageCursor)
         {
-            if (paused) ApplyCursorPaused();
-            else ApplyCursorPlaying();
+            if (paused)
+                ApplyCursorPaused();
+            else if 
+                (!isInventoryOpen) // account for inventory
+                ApplyCursorPlaying();
         }
     }
 

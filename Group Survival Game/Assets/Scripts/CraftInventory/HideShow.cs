@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HideShow : MonoBehaviour
 {
-    [SerializeField] GameObject invetoryUI;
+    [SerializeField] GameObject inventoryUI;
     public bool show = false;
     void Update()
     {
@@ -11,12 +11,15 @@ public class HideShow : MonoBehaviour
             if(show == false)
             {
                 show = true;
-                invetoryUI.SetActive(true);
+                inventoryUI.SetActive(true);
+                Cursor.visible = true;
             }
             else
             {
                 show = false;
-                invetoryUI.SetActive(false);
+                inventoryUI.SetActive(false);
+                Cursor.visible = false;
+                
             }
         }
     }
