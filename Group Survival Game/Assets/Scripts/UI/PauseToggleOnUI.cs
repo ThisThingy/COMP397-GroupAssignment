@@ -42,7 +42,6 @@ public class PauseToggleOnUI : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-
         TogglePause();
     }
 
@@ -108,8 +107,7 @@ public class PauseToggleOnUI : MonoBehaviour, IPointerClickHandler
         {
             if (paused)
                 ApplyCursorPaused();
-            else if 
-                (!isInventoryOpen) // account for inventory
+            else if (!isInventoryOpen) // Account for inventory
                 ApplyCursorPlaying();
         }
     }

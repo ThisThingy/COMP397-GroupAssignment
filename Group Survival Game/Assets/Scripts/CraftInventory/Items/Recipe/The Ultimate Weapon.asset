@@ -12,6 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d4f07910561ab547a827ada69878728, type: 3}
   m_Name: The Ultimate Weapon
   m_EditorClassIdentifier: Assembly-CSharp::CraftingRecipe
-  ingredients: []
-  result: {fileID: 0}
+  ingredients:
+  - item: {fileID: 11400000, guid: 64af53f299bec7948afac6cb780d0ec1, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 7410980e38480b74c99189a84d8a75e2, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 4a312f1108fcb5845b43551d1df19e38, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 1b93e2fbf167ace4cb622e3894ab7ace, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 3793ca2d1c580894f83851235da71b14, type: 2}
+    amount: 50
+  result: {fileID: 11400000, guid: b628ea2f56f5dd947b8dbf0ffc0f0fea, type: 2}
   resultAmount: 1

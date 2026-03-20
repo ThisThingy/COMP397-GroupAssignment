@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Iron Pickaxe
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Iron Pickaxe
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 02df28b01f0427341b8f86a438ae2441, type: 3}
   isStackable: 0
   maxStack: 1
