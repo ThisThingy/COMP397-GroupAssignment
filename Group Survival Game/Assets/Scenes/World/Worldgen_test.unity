@@ -948,6 +948,7 @@ GameObject:
   - component: {fileID: 157807191}
   - component: {fileID: 157807199}
   - component: {fileID: 157807198}
+  - component: {fileID: 157807200}
   - component: {fileID: 157807197}
   - component: {fileID: 157807196}
   - component: {fileID: 157807190}
@@ -1330,6 +1331,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157807189}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &157807200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157807189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2ae6af85c6d1c64b8a1a471ceda4a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSaveManager
 --- !u!1 &166714234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1956,7 +1969,7 @@ MonoBehaviour:
   camerasToDisable: []
   objectsToHideOnClick: []
   objectsToShowOnClick: []
-  player: {fileID: 0}
+  player: {fileID: 157807189}
 --- !u!114 &209361864
 MonoBehaviour:
   m_ObjectHideFlags: 0

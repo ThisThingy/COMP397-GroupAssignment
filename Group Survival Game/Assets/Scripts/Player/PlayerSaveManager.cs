@@ -4,7 +4,8 @@ using UnityEngine;
 [System.Serializable]
 public class SaveStates
 {
-    public Transform transforma;
+    public Vector3 pos;
+    public Quaternion rot;
 }
 
 public class PlayerSaveManager : MonoBehaviour
@@ -13,7 +14,8 @@ public class PlayerSaveManager : MonoBehaviour
     {
         SaveStates data = new SaveStates();
 
-        data.transforma = gameObject.transform;
+        data.pos = gameObject.transform.position;
+        data.rot = gameObject.transform.rotation;
 
         string json = JsonUtility.ToJson(data, true);
 
@@ -34,10 +36,11 @@ public class PlayerSaveManager : MonoBehaviour
             string json = File.ReadAllText(path);
             SaveStates data = JsonUtility.FromJson<SaveStates>(json);
 
-            dete.transforma  = data.transforma;
+            dete.pos  = data.pos;
+            dete.rot = data.rot;
 
-            gameObject.transform.position = dete.transforma.position;
-            gameObject.transform.rotation = dete.transforma.rotation;
+            gameObject.transform.position = dete.pos;
+            gameObject.transform.rotation = dete.rot;
         }
     }
 }

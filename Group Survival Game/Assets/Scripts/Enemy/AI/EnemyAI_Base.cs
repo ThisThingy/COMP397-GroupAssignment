@@ -36,7 +36,7 @@ public class EnemyAI_Base : EnemyStats
     void Update()
     {
         distanceDetection = Vector3.Distance(transform.position, player.position);
-        Debug.LogAssertion(distanceDetection);
+        //Debug.LogAssertion(distanceDetection);
         if (distanceDetection > 20)
         {
             enecom.setAttackFalse();

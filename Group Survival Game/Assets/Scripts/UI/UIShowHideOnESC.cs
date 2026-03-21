@@ -20,7 +20,7 @@ public class UIShowHideOnESC : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Recieved");
+        //Debug.Log("Recieved");
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (objectsToShow != null)
