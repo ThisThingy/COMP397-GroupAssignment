@@ -31,7 +31,7 @@ public class HotbarUI : MonoBehaviour
 
     void Update()
     {
-        // Number keys 1–5
+        // Number keys 1ï¿½5
         for (int i = 0; i < hotbarSize; i++)
         {
             if (Keyboard.current.digit1Key.wasPressedThisFrame && i == 0) SelectSlot(0);
@@ -44,9 +44,14 @@ public class HotbarUI : MonoBehaviour
 
     void UpdateUI()
     {
+        int count = inventory.slots.Count;
+
         for (int i = 0; i < hotbarSize; i++)
         {
-            slotUIs[i].UpdateSlot(inventory.slots[i]);
+            if (i < count)
+                slotUIs[i].UpdateSlot(inventory.slots[i]);
+            else
+                slotUIs[i].UpdateSlot(null); 
         }
     }
 
@@ -55,7 +60,10 @@ public class HotbarUI : MonoBehaviour
         selectedIndex = index;
         UpdateSelection();
 
-        Debug.Log("Selected: " + inventory.slots[index].item?.itemName);
+        if (index < inventory.slots.Count)
+            Debug.Log("Selected: " + inventory.slots[index].item?.itemName);
+        else
+            Debug.Log("Selected empty slot: " + index);
     }
 
     void UpdateSelection()
