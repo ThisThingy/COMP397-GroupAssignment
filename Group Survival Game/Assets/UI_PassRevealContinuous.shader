@@ -7,7 +7,7 @@ Shader "UI/PassRevealContinuous"
         _PassMaskTex ("Pass Mask Texture", 2D) = "black" {}
         _Tint ("Tint", Color) = (1,1,1,1)
 
-        _ScrollSpeed ("Scroll Speed", Float) = 0.3
+        _ManualScrollX ("Manual Scroll X", Float) = 0
         _TilingX ("Mask Tiling X", Float) = 1.0
         _TilingY ("Mask Tiling Y", Float) = 1.0
         _OffsetY ("Mask Offset Y", Float) = 0.0
@@ -57,7 +57,7 @@ Shader "UI/PassRevealContinuous"
             sampler2D _PassMaskTex;
 
             fixed4 _Tint;
-            float _ScrollSpeed;
+            float _ManualScrollX;
             float _TilingX;
             float _TilingY;
             float _OffsetY;
@@ -77,9 +77,8 @@ Shader "UI/PassRevealContinuous"
                 fixed4 bw = tex2D(_MainTex, i.uv) * i.color * _Tint;
                 fixed4 col = tex2D(_ColorTex, i.uv) * i.color * _Tint;
 
-                // 关键：让 passbar 纹理持续滚动
                 float2 maskUV;
-                maskUV.x = frac(i.uv.x * _TilingX - _Time.y * _ScrollSpeed);
+                maskUV.x = frac(i.uv.x * _TilingX - _ManualScrollX);
                 maskUV.y = frac(i.uv.y * _TilingY + _OffsetY);
 
                 fixed mask = tex2D(_PassMaskTex, maskUV).a * _MaskStrength;

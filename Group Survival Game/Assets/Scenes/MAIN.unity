@@ -313,7 +313,6 @@ GameObject:
   - component: {fileID: 46684164}
   - component: {fileID: 46684166}
   - component: {fileID: 46684165}
-  - component: {fileID: 46684167}
   - component: {fileID: 46684168}
   m_Layer: 5
   m_Name: resume
@@ -379,23 +378,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46684163}
   m_CullTransparentMesh: 1
---- !u!114 &46684167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 46684163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7eebeac7074fad247a273bf7a1ff8f9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UITitleRotateAroundStartPivot
-  rotationPivot: {fileID: 1656214273}
-  maxAngle: 30
-  rotateSpeed: 12
-  returnSpeed: 10
-  invert: 0
 --- !u!114 &46684168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2035,13 +2017,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d9f4fb14ca7c1438722fedf6b377a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  maxHealth: 100
+  maxHealth: 99
   attackDamage: 20
   attackRange: 1
   attackSpeed: 1
   enemyLayers:
     serializedVersion: 2
     m_Bits: 0
+  healthText: {fileID: 1619336728}
 --- !u!114 &379518467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5277,7 +5260,6 @@ GameObject:
   - component: {fileID: 843307696}
   - component: {fileID: 843307695}
   - component: {fileID: 843307698}
-  - component: {fileID: 843307697}
   - component: {fileID: 843307699}
   m_Layer: 5
   m_Name: pause
@@ -5343,24 +5325,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 843307693}
   m_CullTransparentMesh: 1
---- !u!114 &843307697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 843307693}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91ccb59f5e16d8b40b477220c4d37e8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIShowHideOnClick
-  objectsToShow:
-  - {fileID: 1015140288}
-  objectsToHide:
-  - {fileID: 1636340357}
-  pauseGameTime: 1
-  resumeGameTime: 0
 --- !u!114 &843307698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5391,7 +5355,11 @@ MonoBehaviour:
   gameplayMenuCanvas: {fileID: 1636340357}
   hideGameplayMenuWhenPaused: 0
   disableWhenPaused:
+  - {fileID: 1546913936}
   - {fileID: 379518467}
+  playerInput: {fileID: 379518465}
+  gameplayActionMap: Player
+  pauseActionMap: UI
   manageCursor: 1
   lockCursorWhenPlaying: 1
 --- !u!1 &843374476
@@ -6606,7 +6574,20 @@ MonoBehaviour:
   optionsRoot: {fileID: 986604841}
   startMenu: {fileID: 756089968}
   pauseMenu: {fileID: 1015140288}
+  gameplayMenu: {fileID: 1636340357}
+  pauseController: {fileID: 843307699}
+  playerInput: {fileID: 0}
+  uiActionMap: UI
   keepPausedWhenReturnToPause: 1
+  showGameplayMenuWhenReturnToPause: 1
+  restartWhenReturnToStart:
+  - {fileID: 2144781657}
+  - {fileID: 1921922528}
+  - {fileID: 0}
+  - {fileID: 740080298}
+  - {fileID: 160107887}
+  - {fileID: 792676914}
+  restartWhenReturnToPause: []
 --- !u!1 &988902918
 GameObject:
   m_ObjectHideFlags: 0
@@ -6694,9 +6675,7 @@ GameObject:
   - component: {fileID: 989203923}
   - component: {fileID: 989203922}
   - component: {fileID: 989203924}
-  - component: {fileID: 989203925}
   - component: {fileID: 989203926}
-  - component: {fileID: 989203927}
   m_Layer: 5
   m_Name: continue
   m_TagString: Untagged
@@ -6775,26 +6754,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIHoverScale
   hoverScale: {x: 0.92, y: 0.92, z: 1}
   speed: 12
---- !u!114 &989203925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989203920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3800a84943fb7541a8874ebe97b0da1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIMenuClickAction
-  actionType: 0
-  targetCamera: {fileID: 0}
-  camerasToDisable: []
-  objectsToHideOnClick:
-  - {fileID: 1015140288}
-  objectsToShowOnClick:
-  - {fileID: 1636340357}
-  player: {fileID: 0}
 --- !u!114 &989203926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6808,23 +6767,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIContinueClick
   pauseController: {fileID: 843307699}
---- !u!114 &989203927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989203920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91ccb59f5e16d8b40b477220c4d37e8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIShowHideOnClick
-  objectsToShow:
-  - {fileID: 1636340357}
-  objectsToHide: []
-  pauseGameTime: 1
-  resumeGameTime: 0
 --- !u!1 &993149264
 GameObject:
   m_ObjectHideFlags: 0
@@ -13841,12 +13783,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3800a84943fb7541a8874ebe97b0da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIMenuClickAction
-  actionType: 1
-  targetCamera: {fileID: 0}
+  actionType: 2
+  targetCamera: {fileID: 301856916}
   camerasToDisable: []
   objectsToHideOnClick: []
   objectsToShowOnClick: []
-  player: {fileID: 0}
+  player: {fileID: 379518463}
 --- !u!1 &2103159504
 GameObject:
   m_ObjectHideFlags: 0
@@ -14458,6 +14400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIPassRevealContinuousDriver
   targetImage: {fileID: 2144781657}
+  baseMaterial: {fileID: 0}
   blackWhiteSprite: {fileID: 21300000, guid: ef209c74a35e358488007d762eae27ae, type: 3}
   colorSprite: {fileID: 21300000, guid: 5a90b9d337a5ade40885da79cf2b308b, type: 3}
   passMaskSprite: {fileID: 21300000, guid: 48dbd46b5599ea94a8c7c34597e5dd1b, type: 3}

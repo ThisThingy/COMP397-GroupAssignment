@@ -9,9 +9,15 @@ public class PauseToggleOnUI : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject gameplayMenuCanvas;
     [SerializeField] private bool hideGameplayMenuWhenPaused = false;
 
-    [Header("Disable Player Look / Input When Paused")]
-    [Tooltip("把负责视角转动的脚本拖进来（比如 MouseLook/CameraLook/CinemachineInput 等）。也可以拖 PlayerInput。")]
+    [Header("Disable Player Look When Paused")]
+    [Tooltip(" MouseLook、CameraLook、CinemachineInputProvider。no PlayerInput")]
     [SerializeField] private Behaviour[] disableWhenPaused;
+
+    [Header("Input Action Map")]
+    [Tooltip(" PlayerInput ")]
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private string gameplayActionMap = "Player";
+    [SerializeField] private string pauseActionMap = "UI";
 
     [Header("Cursor")]
     [SerializeField] private bool manageCursor = true;
@@ -22,12 +28,25 @@ public class PauseToggleOnUI : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        // 确保开局是正常状态
         isPaused = false;
+        isInventoryOpen = false;
         Time.timeScale = 1f;
 
         if (pauseMenuCanvas != null)
             pauseMenuCanvas.SetActive(false);
+
+        if (gameplayMenuCanvas != null && hideGameplayMenuWhenPaused)
+            gameplayMenuCanvas.SetActive(true);
+
+        SetLookScriptsEnabled(true);
+
+        if (playerInput != null)
+        {
+            playerInput.enabled = true;
+
+            if (!string.IsNullOrEmpty(gameplayActionMap))
+                playerInput.SwitchCurrentActionMap(gameplayActionMap);
+        }
 
         ApplyCursorPlaying();
     }
@@ -49,34 +68,38 @@ public class PauseToggleOnUI : MonoBehaviour, IPointerClickHandler
     {
         SetPaused(!isPaused);
     }
+
+    public void Resume()
+{
+    SetPaused(false);
+}
+
+public void Pause()
+{
+    SetPaused(true);
+}
+
     public void SetInventoryOpen(bool open)
     {
         isInventoryOpen = open;
 
-        // Disable player look when inventory is open (same as pause)
-        if (disableWhenPaused != null)
+       
+        if (isPaused)
         {
-            for (int i = 0; i < disableWhenPaused.Length; i++)
-            {
-                if (disableWhenPaused[i] != null)
-                    disableWhenPaused[i].enabled = !open;
-            }
+            SetLookScriptsEnabled(false);
+        }
+        else
+        {
+            SetLookScriptsEnabled(!open);
         }
 
-        // Cursor handling
         if (manageCursor && !isPaused)
         {
             if (open)
-                ApplyCursorPaused();   // show cursor
+                ApplyCursorPaused();
             else
-                ApplyCursorPlaying(); // hide cursor
+                ApplyCursorPlaying();
         }
-    }
-
-    // 给 PauseMenu 的 Resume 按钮绑定这个
-    public void Resume()
-    {
-        SetPaused(false);
     }
 
     private void SetPaused(bool paused)
@@ -89,26 +112,49 @@ public class PauseToggleOnUI : MonoBehaviour, IPointerClickHandler
         if (gameplayMenuCanvas != null && hideGameplayMenuWhenPaused)
             gameplayMenuCanvas.SetActive(!paused);
 
-        // 关键：暂停时间
         Time.timeScale = paused ? 0f : 1f;
 
-        // 关键：禁用视角/输入脚本，防止相机继续转
-        if (disableWhenPaused != null)
+        
+        if (paused)
+            SetLookScriptsEnabled(false);
+        else
+            SetLookScriptsEnabled(!isInventoryOpen);
+
+
+        if (playerInput != null)
         {
-            for (int i = 0; i < disableWhenPaused.Length; i++)
+            playerInput.enabled = true;
+
+            string targetMap = paused ? pauseActionMap : gameplayActionMap;
+            if (!string.IsNullOrEmpty(targetMap))
             {
-                if (disableWhenPaused[i] != null)
-                    disableWhenPaused[i].enabled = !paused;
+                playerInput.SwitchCurrentActionMap(targetMap);
             }
         }
 
-        // 关键：鼠标切换（暂停时释放鼠标给UI）
         if (manageCursor)
         {
             if (paused)
                 ApplyCursorPaused();
-            else if (!isInventoryOpen) // Account for inventory
+            else if (!isInventoryOpen)
                 ApplyCursorPlaying();
+        }
+
+        Debug.Log($"[PauseToggleOnUI] isPaused={isPaused}, timeScale={Time.timeScale}");
+        if (playerInput != null && playerInput.currentActionMap != null)
+        {
+            Debug.Log($"[PauseToggleOnUI] currentActionMap={playerInput.currentActionMap.name}");
+        }
+    }
+
+    private void SetLookScriptsEnabled(bool enabledState)
+    {
+        if (disableWhenPaused == null) return;
+
+        for (int i = 0; i < disableWhenPaused.Length; i++)
+        {
+            if (disableWhenPaused[i] != null)
+                disableWhenPaused[i].enabled = enabledState;
         }
     }
 

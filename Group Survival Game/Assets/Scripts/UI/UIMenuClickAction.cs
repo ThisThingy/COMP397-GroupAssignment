@@ -14,12 +14,14 @@ public class UIMenuClickAction : MonoBehaviour, IPointerClickHandler
     [SerializeField] private ActionType actionType = ActionType.SwitchCamera;
 
     [Header("Camera Switch (for Start / NewGame)")]
-    [SerializeField] private Camera targetCamera;      
-    [SerializeField] private Camera[] camerasToDisable; 
+    [SerializeField] private Camera targetCamera;
+    [SerializeField] private Camera[] camerasToDisable;
 
     [Header("Optional UI")]
-    [SerializeField] private GameObject[] objectsToHideOnClick; 
+    [SerializeField] private GameObject[] objectsToHideOnClick;
     [SerializeField] private GameObject[] objectsToShowOnClick;
+
+    [Header("Save / Quit")]
     [SerializeField] private GameObject player;
 
     public void OnPointerClick(PointerEventData eventData)
@@ -33,9 +35,10 @@ public class UIMenuClickAction : MonoBehaviour, IPointerClickHandler
             case ActionType.QuitGame:
                 DoQuitGame();
                 break;
+
             case ActionType.QuitAndSave:
                 DoSaveQuit();
-            break;
+                break;
         }
     }
 
@@ -47,7 +50,6 @@ public class UIMenuClickAction : MonoBehaviour, IPointerClickHandler
             return;
         }
 
-      
         if (camerasToDisable != null)
         {
             for (int i = 0; i < camerasToDisable.Length; i++)
@@ -57,10 +59,8 @@ public class UIMenuClickAction : MonoBehaviour, IPointerClickHandler
             }
         }
 
-  
         targetCamera.gameObject.SetActive(true);
 
-   
         if (objectsToHideOnClick != null)
         {
             for (int i = 0; i < objectsToHideOnClick.Length; i++)
@@ -84,12 +84,22 @@ public class UIMenuClickAction : MonoBehaviour, IPointerClickHandler
 
     private void DoSaveQuit()
     {
-        Debug.Log("Exit clicked -> QuitGame()");
-        player.GetComponent<PlayerSaveManager>().SaveGame();
+        Debug.Log("Exit clicked -> Save and Quit");
 
+        if (player != null)
+        {
+            string savePath = SaveSystem.SaveNew(player.transform);
+            Debug.Log("Saved to: " + savePath);
+        }
+        else
+        {
+            Debug.LogWarning("[UIMenuClickAction] player 未设置，无法保存");
+        }
+
+
+        Time.timeScale = 1f;
 
 #if UNITY_EDITOR
-        // 编辑器里不会真的退出，用这个提示
         UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
@@ -100,8 +110,9 @@ public class UIMenuClickAction : MonoBehaviour, IPointerClickHandler
     {
         Debug.Log("Exit clicked -> QuitGame()");
 
+        Time.timeScale = 1f;
+
 #if UNITY_EDITOR
-        // 编辑器里不会真的退出，用这个提示
         UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
