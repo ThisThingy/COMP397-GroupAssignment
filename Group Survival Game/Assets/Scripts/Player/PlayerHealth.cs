@@ -1,7 +1,14 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameObject gameplayMenu;
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private string uiActionMap = "UI";
+
+    private bool isDead = false;
     public int maxHealth = 100;
     private int currentHealth;
 
@@ -11,11 +18,20 @@ public class PlayerHealth : MonoBehaviour
     public LayerMask enemyLayers;   //no logic yet
     public TextMeshProUGUI healthText;
 
-    void Start()
+   void Start()
+ {
+    currentHealth = maxHealth;
+    UpdateHealthText();
+
+    if (currentHealth <= 0)
     {
-     currentHealth = maxHealth;
-     UpdateHealthText();
+        Death();
+        return;
     }
+
+    if (gameOverMenu != null)
+        gameOverMenu.SetActive(false);
+ }
    void UpdateHealthText()
    {
      if (healthText != null)
@@ -29,14 +45,23 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void TakeDamage(int damage)
+{
+    if (isDead) return;
+
+    currentHealth -= damage;
+
+    if (currentHealth < 0)
     {
-        currentHealth -= damage;
-        UpdateHealthText();
-        if (currentHealth <= 0)
-        {
-            Death();
-        }
+        currentHealth = 0;
     }
+
+    UpdateHealthText();
+
+    if (currentHealth <= 0)
+    {
+        Death();
+    }
+}
 
     public void Heal(int amount)    //temp, idk if we'll need it
    {
@@ -59,7 +84,33 @@ public class PlayerHealth : MonoBehaviour
     }
     
     private void Death()
-    {
-        Debug.Log("Player has died.");
-    }
+   {
+     if (isDead) return;
+     isDead = true;
+ 
+     Debug.Log("Player has died.");
+
+     if (gameplayMenu != null)
+        gameplayMenu.SetActive(false);
+
+     if (gameOverMenu != null)
+     {
+        gameOverMenu.SetActive(true);
+        gameOverMenu.transform.SetAsLastSibling();
+     }
+
+     Time.timeScale = 0f;
+
+     Cursor.visible = true;
+     Cursor.lockState = CursorLockMode.None;
+
+     if (playerInput != null)
+{
+    playerInput.enabled = true;
+    playerInput.ActivateInput();
+
+    if (!string.IsNullOrEmpty(uiActionMap))
+        playerInput.SwitchCurrentActionMap(uiActionMap);
+}
+   }
 }
